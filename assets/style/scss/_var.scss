@@ -1,0 +1,16 @@
+$size : 16px;
+$bg-main-content: #f2f2fc;
+$bg-main-aside : #fdf9ff;
+$border-color-aside : #e8dfec;
+$bg-logo : #ededed;
+$color-logo:#302e4d;
+$pink : #ec1839;
+
+// pseudo
+@mixin pseudo($h,$w,$bg) {
+    content: "";
+    display: inline-block;
+    width: $w;
+    height: $h;
+    background-color: $bg;
+}

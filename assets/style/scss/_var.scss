@@ -5,6 +5,9 @@ $border-color-aside : #e8dfec;
 $bg-logo : #ededed;
 $color-logo:#302e4d;
 $pink : #ec1839;
+$color-link: #0288D1;
+$color-twitter:#03A9F4;
+$color-what:#40C351;
 
 // pseudo
 @mixin pseudo($h,$w,$bg) {
@@ -13,4 +16,19 @@ $pink : #ec1839;
     width: $w;
     height: $h;
     background-color: $bg;
+}
+
+// center position
+%center{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+
+// center display
+%center_child_disp{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

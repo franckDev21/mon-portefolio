@@ -1,13 +1,90 @@
 @import "./general";
 @import "./var";
+@import "./animation";
 
 .main-container{
     display: flex;
 }
 .main-content{
+    overflow: hidden;
     background-color: $bg-main-content;
     min-height: 100vh;
     width: calc(100% - 300px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    .profil{
+        text-align: center;
+        & img{
+            transform: translateY(-20px);
+            width: 260px;
+            height: 260px;
+            border-radius: 50%;
+            border: 10px solid $bg-main-aside;
+        }
+        & .name{
+            font-weight: bold;
+            font-size: $size * 2;
+            color: $color-logo;
+            margin-bottom: 10px;
+        }
+        & .links{
+            display: flex;
+            justify-content: space-around;
+            width: 80%;
+            margin-left:  auto;
+            margin-right:  auto;
+            margin-top: 30px;
+            a{
+                display: inline-block;
+                flex: none;
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                background-color:$pink;
+                position: relative;
+                transition: transform .4s ease-in-out;
+                & svg{
+                    @extend %center;
+                }
+                &:hover{
+                    transform: rotate(360deg);
+                }
+            }
+        }
+    }
+    .slide-toggle-theme{
+        position: absolute;
+        right: 0;
+        top: 20px;
+        height: 130px;
+        width: 300px;
+        border-radius: 5px 0 0 5px;
+        border: 1px solid $border-color-aside;
+        background-color: #fff;
+        transition: transform .4s ease-in-out;
+        transform: translateX(300px);
+        &.active{
+            transform: translateX(0);
+        }
+        & .btn{
+            border: 1px solid $border-color-aside;
+            width: 40px;
+            height: 40px;
+            background-color: #fff;
+            top: 50%;
+            left: 50%;
+            transform: translate(-190px,-50%);
+            position: absolute;
+            border-radius: 5px 0 0 5px;
+            cursor: pointer;
+            @extend %center_child_disp;
+            & > svg{
+                animation: rotate 2s linear 0s infinite;
+            }
+        }
+    }
 }
 .main-aside{
     width: 300px;
@@ -17,6 +94,40 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    position: relative;
+
+    .toggle-btn{
+        display: none;
+        position: fixed;
+        width: 40px;
+        height: 40px;
+        border: 1px solid #d4d4e3;
+        top: 30px;
+        left: 350px;
+        background-color: #fdf9ff;
+        cursor: pointer;
+        border-radius: 5px;
+        z-index: 100;
+        & span{
+            width: 20px;
+            height: 2px;
+            background-color: $pink;
+            display: inline-block;
+            @extend %center;
+            &::before{
+                position: absolute;
+                top: 0;
+                left: 0;
+                transform:translateY(-6px);
+                @include pseudo(2px,20px,$pink);
+            }
+            &::after{
+                position: absolute;
+                transform:translateY(6px);
+                @include pseudo(2px,20px,$pink);
+            }
+        }
+    }
 
     .logo{
         padding: 30px 0;
@@ -64,9 +175,13 @@
                     [class*='fa-']{
                         margin-right: 10px;
                     }
+                    &.active{
+                        color: $pink;
+                    }
                     border-bottom: 1px solid $border-color-aside;
-                    transition: transform .3s ease-in-out ,border-color .3s ease-in-out;
-                    &:hover{
+                    transition:color .2s  ,transform .3s ease-in-out ,border-color .3s ease-in-out;
+                    &:not(.active):hover{
+                        color: $pink;
                         transform: translateX(7px);
                         border-color: transparent;
                         &::after{
@@ -92,6 +207,7 @@
 
     .copyright{
         font-size: $size - 2;
+        color: #7d7d7d;
     }
 
     // end aside
